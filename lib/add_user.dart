@@ -1,7 +1,7 @@
 import 'package:cadastro_usuarios/widgets/buttonHandleForm.dart';
-import 'package:cadastro_usuarios/widgets/dateTimeInput.dart';
-import 'package:cadastro_usuarios/widgets/defaultInput.dart';
-import 'package:cadastro_usuarios/widgets/passwordInput.dart';
+import 'package:cadastro_usuarios/widgets/inputs/dateTimeInput.dart';
+import 'package:cadastro_usuarios/widgets/inputs/defaultInput.dart';
+import 'package:cadastro_usuarios/widgets/inputs/passwordInput.dart';
 import 'package:flutter/widgets.dart';
 
 class AddUser extends StatefulWidget{

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+
+final dateFormatter = DateFormat("dd/MM/yyyy");
 
 class DateTimeInput extends StatefulWidget{
 
@@ -18,12 +21,14 @@ class _DateTimeInputState extends State<DateTimeInput>{
   _DateTimeInputState(){
     now = DateTime.now();
     firstDate = DateTime(now.year - 100, now.month, now.day);
+    selectedDate = now;
   }
 
   final _inputController = TextEditingController();
 
   late final DateTime now;
   late final DateTime firstDate;
+  late DateTime selectedDate;
 
   @override
   void dispose(){
@@ -41,7 +46,16 @@ class _DateTimeInputState extends State<DateTimeInput>{
       lastDate: now
     );
 
-    _inputController.text = pickedData.toString();
+    
+
+    if(pickedData == null){
+      return;
+    }
+
+    setState(() {
+      selectedDate = pickedData;
+    });
+    _inputController.text = dateFormatter.format(pickedData);
 
   }
 
