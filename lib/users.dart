@@ -15,8 +15,8 @@ class Users extends StatefulWidget{
 class _UsersState extends State<Users>{
 
   final List<User> registeredUsers = List.filled(
-    20,
-    User(id: 1, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", avatarUrl: "assets/user.png", birthDate: DateTime.now()),
+    3,
+    User(id: 1, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
     growable: true
   );
 
@@ -25,9 +25,15 @@ class _UsersState extends State<Users>{
     showModalBottomSheet(
       isScrollControlled: true,
       context: context, 
-      builder: (ctx) => const AddUser()
+      builder: (ctx) => AddUser(onAddUser: _addUser)
     );
 
+  }
+
+  void _addUser(User user){
+    setState(() {
+      registeredUsers.add(user);
+    });
   }
 
   @override

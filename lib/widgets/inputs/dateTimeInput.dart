@@ -6,10 +6,11 @@ final dateFormatter = DateFormat("dd/MM/yyyy");
 
 class DateTimeInput extends StatefulWidget{
 
-  const DateTimeInput({super.key, this.maxLength = 30, required this.label});
+  DateTimeInput(this.onUpdateDate, {super.key, this.maxLength = 30, required this.label});
 
   final int maxLength;
   final String label;
+  void Function(DateTime updatedDate) onUpdateDate;
 
   @override
   State<DateTimeInput> createState() => _DateTimeInputState();   
@@ -21,14 +22,12 @@ class _DateTimeInputState extends State<DateTimeInput>{
   _DateTimeInputState(){
     now = DateTime.now();
     firstDate = DateTime(now.year - 100, now.month, now.day);
-    selectedDate = now;
   }
 
   final _inputController = TextEditingController();
 
   late final DateTime now;
   late final DateTime firstDate;
-  late DateTime selectedDate;
 
   @override
   void dispose(){
@@ -46,15 +45,11 @@ class _DateTimeInputState extends State<DateTimeInput>{
       lastDate: now
     );
 
-    
-
     if(pickedData == null){
       return;
     }
 
-    setState(() {
-      selectedDate = pickedData;
-    });
+    widget.onUpdateDate(pickedData);
     _inputController.text = dateFormatter.format(pickedData);
 
   }

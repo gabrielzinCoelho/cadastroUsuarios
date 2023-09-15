@@ -25,9 +25,9 @@ class UserData extends StatelessWidget{
             Text(
               email,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: Colors.purple
+                color: Color.fromARGB(255, 199, 88, 250)
               )
             ),
           ],

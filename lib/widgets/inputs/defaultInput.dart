@@ -1,5 +1,4 @@
 import 'package:cadastro_usuarios/widgets/inputs/defaultFormatter.dart';
-import 'package:cadastro_usuarios/widgets/inputs/numberFormatter.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -29,11 +28,13 @@ final inputFormatters = {
 
 class DefaultInput extends StatefulWidget{
 
-  const DefaultInput({super.key, this.maxLength = 30, required this.label, this.inputType = validsInputTypes.text});
+  const DefaultInput(this.inputController, {super.key, this.maxLength = 30, required this.label, this.inputType = validsInputTypes.text});
 
   final int maxLength;
   final String label;
   final validsInputTypes inputType;
+
+  final TextEditingController inputController;
 
   @override
   State<DefaultInput> createState() => _DefaultInputState();   
@@ -42,14 +43,7 @@ class DefaultInput extends StatefulWidget{
 
 class _DefaultInputState extends State<DefaultInput>{
 
-  final _inputController = TextEditingController();
   late final inputFormatter;
-
-  @override
-  void dispose(){
-    _inputController.dispose();
-    super.dispose();
-  }
 
   @override
   void initState(){
@@ -65,7 +59,7 @@ class _DefaultInputState extends State<DefaultInput>{
         inputFormatters: [
           inputFormatter
         ],
-        controller: _inputController,
+        controller: widget.inputController,
         maxLength: widget.maxLength,
         keyboardType: keyboardTypes[widget.inputType],
         decoration: InputDecoration(

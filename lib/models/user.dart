@@ -1,3 +1,5 @@
+import "dart:io";
+
 class User{
 
   User({
@@ -5,12 +7,13 @@ class User{
     required this.name,
     required this.email,
     required this.phone,
-    required this.avatarUrl,
-    required this.birthDate
+    required this.birthDate,
+    this.avatar,
   });
 
   int id;
-  String name, email, phone, avatarUrl;
+  String name, email, phone;
+  File? avatar;
   DateTime birthDate;
 
 

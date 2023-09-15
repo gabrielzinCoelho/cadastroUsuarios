@@ -20,10 +20,13 @@ class UserItem extends StatelessWidget{
       ),
       child: Row(
         children: [
-          UserAvatar(avatarUrl: user.avatarUrl),
+          UserAvatar(avatarFile: user.avatar),
           UserData(name: user.name, email: user.email),
-          const Center(
-            child: Icon(Icons.mode_edit_outline_outlined),
+          GestureDetector(
+            onTap: null,
+            child: const Center(
+              child: Icon(Icons.mode_edit_outline_outlined),
+            ),
           )
         ],
       ),
