@@ -14,18 +14,19 @@ class Users extends StatefulWidget{
 
 class _UsersState extends State<Users>{
 
-  final List<User> registeredUsers = List.filled(
-    3,
+  final List<User> registeredUsers = [
     User(id: 1, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
-    growable: true
-  );
+    User(id: 2, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
+    User(id: 3, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
+    User(id: 4, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null)
+  ];
 
   void _openAddUserModal(){
 
     showModalBottomSheet(
       isScrollControlled: true,
       context: context, 
-      builder: (ctx) => AddUser(onAddUser: _addUser)
+      builder: (ctx) => AddUser(onSubmitUser: _addUser)
     );
 
   }
@@ -35,6 +36,12 @@ class _UsersState extends State<Users>{
       registeredUsers.add(user);
     });
   }
+
+ void _removeUser(User user){
+  setState(() {
+    registeredUsers.remove(user);
+  });
+ }
 
   @override
   Widget build(BuildContext context){
@@ -58,7 +65,7 @@ class _UsersState extends State<Users>{
           )
         ],
       ),
-      body: UsersList(users: registeredUsers),
+      body: UsersList(users: registeredUsers, onUserDeleted: _removeUser),
     );
   }
 

@@ -9,11 +9,12 @@ import "dart:io";
 
 class AddUser extends StatefulWidget{
 
-  const AddUser({super.key, required this.onAddUser});
-  final void Function(User user) onAddUser;
+  AddUser({super.key, this.user, required this.onSubmitUser});
+  final void Function(User user) onSubmitUser;
 
   @override
   State<AddUser> createState() => _AddUserState();
+  User? user;
 
 }
 
@@ -27,7 +28,7 @@ class _AddUserState extends State<AddUser>{
 
   void handleFormSubmit(){
     //validar inputs
-    widget.onAddUser(
+    widget.onSubmitUser(
       User(
         id: 1,
         name: _inputNameController.text,
@@ -35,7 +36,8 @@ class _AddUserState extends State<AddUser>{
         email: _inputEmailController.text,
         birthDate: selectedDate!,
         avatar: avatarFile
-      ));
+      )
+    );
     
   }
 
@@ -57,6 +59,22 @@ class _AddUserState extends State<AddUser>{
     setState(() {
       avatarFile = updatedFile;
     });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    if(widget.user == null){
+      return;
+    }
+
+    _inputNameController.text = widget.user!.name;
+    _inputEmailController.text = widget.user!.email;
+    _inputPhoneController.text = widget.user!.phone;
+    
+    selectedDate = widget.user!.birthDate;
+    avatarFile = widget.user!.avatar;
+    
   }
 
   @override
@@ -88,7 +106,7 @@ class _AddUserState extends State<AddUser>{
               DefaultInput(_inputNameController, label: "Nome"),
               DefaultInput(_inputEmailController, label: "Email", inputType: validsInputTypes.email),
               DefaultInput(_inputPhoneController, label: "Celular", inputType: validsInputTypes.phone),
-              DateTimeInput(handleInputDate, label: "Data de Nascimento"),
+              DateTimeInput(handleInputDate, selectedDate, label: "Data de Nascimento"),
               PasswordInput(_inputPasswordController, label: "Senha", maxLength: 20),
               PasswordInput(_inputConfirmPasswordController, label: "Confirmar senha", maxLength: 20),
               const SizedBox( height: 30),
