@@ -16,5 +16,14 @@ class User{
   File? avatar;
   DateTime birthDate;
 
+  factory User.fromJson(Map<String, dynamic> json){
+    return User(
+      id: json['id'],
+      name: json['nome'],
+      email: json['email'],
+      birthDate: DateTime.now(),
+      phone: (json['telefone']).toString(),
+    );
+  }
 
 }
