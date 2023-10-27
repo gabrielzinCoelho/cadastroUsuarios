@@ -30,12 +30,13 @@ class _AddUserState extends State<AddUser>{
     //validar inputs
     widget.onSubmitUser(
       User(
-        id: 1,
+        id: widget.user?.id,
         name: _inputNameController.text,
         phone: _inputPhoneController.text,
         email: _inputEmailController.text,
+        password: _inputPasswordController.text,
         birthDate: selectedDate!,
-        avatar: avatarFile
+        // avatar: avatarFile
       )
     );
     
@@ -71,6 +72,7 @@ class _AddUserState extends State<AddUser>{
     _inputNameController.text = widget.user!.name;
     _inputEmailController.text = widget.user!.email;
     _inputPhoneController.text = widget.user!.phone;
+    _inputPasswordController.text = widget.user!.password;
     
     selectedDate = widget.user!.birthDate;
     avatarFile = widget.user!.avatar;

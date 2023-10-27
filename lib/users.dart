@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cadastro_usuarios/add_user.dart';
 import 'package:cadastro_usuarios/models/user.dart';
 import 'package:cadastro_usuarios/users_list.dart';
+import 'package:cadastro_usuarios/widgets/inputs/dateTimeInput.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,9 +19,6 @@ class _UsersState extends State<Users>{
 
   // final List<User> registeredUsers = [
   //   User(id: 1, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
-  //   User(id: 2, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
-  //   User(id: 3, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null),
-  //   User(id: 4, name: "Gabriel Coelho", email: "coelhocostag@gmail.com", phone: "99978-3421", birthDate: DateTime.now(), avatar: null)
   // ];
 
   late final List<User> registeredUsers;
@@ -66,16 +64,55 @@ class _UsersState extends State<Users>{
 
   }
 
-  void _addUser(User user){
-    setState(() {
-      registeredUsers.add(user);
-    });
+  void _addUser(User user) async {
+    
+    try{
+      final response = await http.post(
+        Uri.parse("http://10.0.2.2:8080/cadastro"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, dynamic>{
+          "nome": user.name,
+          "email": user.email,
+          "dataNasc": dateFormatter.format(user.birthDate),
+          "telefone": user.phone,
+          "senha": user.password
+        })
+      );
+      
+      if(response.statusCode != 200){
+        throw Exception();
+      }
+      
+      setState(() {
+        registeredUsers.add(
+          User.fromJson(
+            jsonDecode(response.body)
+          )
+        );
+      });
+
+    }catch(e){
+    }
+    
   }
 
- void _removeUser(User user){
-  setState(() {
-    registeredUsers.remove(user);
-  });
+ void _removeUser(User user) async {
+
+  try{
+
+    final response  = await http.delete(
+      Uri.parse("http://10.0.2.2:8080/deleta/${user.id}")
+    );
+
+    if(response.statusCode != 200)
+      throw Exception();
+
+    setState(() {
+      registeredUsers.remove(user);
+    });
+
+  }catch(e){}
+
  }
 
   @override

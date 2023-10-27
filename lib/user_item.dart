@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:cadastro_usuarios/add_user.dart';
 import 'package:cadastro_usuarios/models/user.dart';
 import 'package:cadastro_usuarios/user_avatar.dart';
 import 'package:cadastro_usuarios/user_data.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:cadastro_usuarios/widgets/inputs/dateTimeInput.dart';
 
 class UserItem extends StatefulWidget{
   const UserItem({super.key, required this.user});
@@ -29,14 +33,40 @@ class _UserItemState extends State<UserItem>{
 
   }
 
-  void _editUser(User user){
-    setState(() {
-      this.user.name = user.name;
-      this.user.email = user.email;
-      this.user.phone = user.email;
-      this.user.birthDate = user.birthDate;
-      this.user.avatar = user.avatar;
-    });
+  void _editUser(User user) async {
+    
+    try{
+
+      final response = await http.put(
+        Uri.parse("http://10.0.2.2:8080/atualiza"),
+        headers: {"Content-Type": "application/json"},
+        body:jsonEncode(<String, dynamic>{
+          "id": user.id,
+          "nome": user.name,
+          "email": user.email,
+          "dataNasc": dateFormatter.format(user.birthDate),
+          "telefone": user.phone,
+          "senha": user.password
+        })
+      );
+
+      if(response.statusCode != 200){
+        throw Exception();
+      }
+
+      final userResponse = User.fromJson(jsonDecode(response.body));
+
+      setState(() {
+        this.user.name = userResponse.name;
+        this.user.email = userResponse.email;
+        this.user.phone = userResponse.phone;
+        this.user.birthDate = userResponse.birthDate;
+        this.user.password = userResponse.password;
+        // this.user.avatar = userResponse.avatar;
+      });
+
+    }catch(e){}
+
   }
 
   @override
