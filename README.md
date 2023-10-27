@@ -13,7 +13,6 @@ Quaisquer sugestões de possíveis melhorias sempre são bem-vindas.
     src="./assets/readmeImages/home.png" 
     style="width: 250px; height: 500px; margin: 0;" 
 />
-
 <img 
     src="./assets/readmeImages/userForm03.png" 
     style=" width: 250px; height: 500px; margin: 0;" 
