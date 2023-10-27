@@ -17,14 +17,12 @@ Quaisquer sugestões de possíveis melhorias sempre são bem-vindas.
     src="./assets/readmeImages/userForm03.png" 
     style=" width: 250px; height: 500px; margin: 0;" 
 />
-
 </div>
 
 <br>
 <br>
 
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
-
 <img 
     src="./assets/readmeImages/userForm01.png" 
     style=" width: 250px; height: 500px; margin: 0;" 
@@ -33,5 +31,4 @@ Quaisquer sugestões de possíveis melhorias sempre são bem-vindas.
     src="./assets/readmeImages/userForm02.png" 
     style=" width: 250px; height: 500px; margin: 0;" 
 />
-
 </div>
