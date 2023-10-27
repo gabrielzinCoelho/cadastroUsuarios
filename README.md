@@ -1,16 +1,38 @@
-# cadastro_usuarios
+# Contacts Plus
 
-A new Flutter project.
+## Mantenha seus contatos mais importantes atualizados!
 
-## Getting Started
+Projeto desenvolvido durante processo de capacitação interno ofertado pela **Emakers**, empresa júnior vinculada à UFLA.
 
-This project is a starting point for a Flutter application.
+Quaisquer sugestões de possíveis melhorias sempre são bem-vindas.
 
-A few resources to get you started if this is your first Flutter project:
+## Sobre o projeto
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+<img 
+    src="./assets/readmeImages/home.png" 
+    style="width: 250px; height: 500px; margin: 0;" 
+/>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img 
+    src="./assets/readmeImages/userForm03.png" 
+    style=" width: 250px; height: 500px; margin: 0;" 
+/>
+
+</div>
+
+<br>
+<br>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img 
+    src="./assets/readmeImages/userForm01.png" 
+    style=" width: 250px; height: 500px; margin: 0;" 
+/>
+<img 
+    src="./assets/readmeImages/userForm02.png" 
+    style=" width: 250px; height: 500px; margin: 0;" 
+/>
+
+</div>
